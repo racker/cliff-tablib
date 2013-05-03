@@ -47,3 +47,10 @@ class JsonFormatter(TablibFormatterBase):
 
     def _format_dataset(self, dataset):
         return dataset.json
+
+    def emit_one(self, column_names, data, stdout, parsed_args):
+        dataset = tablib.Dataset(headers=column_names)
+        dataset.append(data)
+        stdout.write(self._format_dataset(dataset))
+        stdout.write('\n')
+        return
